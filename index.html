@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Únete a Nexo, una comunidad para aprender, compartir ideas y crecer en compañía.">
+  <title>Nexo — aprende en comunidad</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #17243b;
+      --muted: #64728a;
+      --brand: #4b50d7;
+      --brand-dark: #383db8;
+      --line: #dce2ed;
+      --surface: #fff;
+      --wash: #f4f6fb;
+      --focus: #a7adff;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--wash);
+      color: var(--ink);
+      font: 16px/1.55 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    a { color: var(--brand-dark); }
+
+    .hero {
+      padding: 3.5rem 1.25rem 5.5rem;
+      background: radial-gradient(ellipse at top right, #7479f2 0, #454bd0 38%, #252d59 100%);
+      color: #fff;
+    }
+
+    .hero-inner, main {
+      width: min(100% - 2rem, 1020px);
+      margin-inline: auto;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: .65rem;
+      color: #fff;
+      font-size: 1.1rem;
+      font-weight: 750;
+      letter-spacing: .03em;
+      text-decoration: none;
+    }
+
+    .brand-mark {
+      display: grid;
+      width: 2rem;
+      height: 2rem;
+      place-items: center;
+      border: 1px solid #ffffff80;
+      border-radius: .7rem;
+    }
+
+    .hero h1 {
+      max-width: 700px;
+      margin: 3rem 0 .75rem;
+      font-size: clamp(2.2rem, 6vw, 4rem);
+      line-height: 1.08;
+      letter-spacing: -.04em;
+    }
+
+    .hero p {
+      max-width: 600px;
+      margin: 0;
+      color: #e3e5ff;
+      font-size: 1.12rem;
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: minmax(0, 1.55fr) minmax(270px, .8fr);
+      gap: 1.5rem;
+      align-items: start;
+      margin-top: -2.5rem;
+      padding-bottom: 4rem;
+    }
+
+    .card {
+      min-width: 0;
+      padding: clamp(1.25rem, 4vw, 2rem);
+      border: 1px solid #e8ebf2;
+      border-radius: 1.15rem;
+      background: var(--surface);
+      box-shadow: 0 18px 50px #202a4814;
+    }
+
+    .card h2 {
+      margin: 0 0 .35rem;
+      font-size: 1.6rem;
+      letter-spacing: -.025em;
+    }
+
+    .intro, .help-copy {
+      margin: 0 0 1.5rem;
+      color: var(--muted);
+    }
+
+    fieldset {
+      min-width: 0;
+      margin: 0 0 1.25rem;
+      padding: 1.15rem;
+      border: 1px solid var(--line);
+      border-radius: .8rem;
+    }
+
+    legend {
+      padding: 0 .4rem;
+      font-weight: 700;
+    }
+
+    .field-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .field, .option-list { min-width: 0; }
+    .field-wide { grid-column: 1 / -1; }
+
+    label, .group-label {
+      display: block;
+      margin-bottom: .35rem;
+      font-size: .92rem;
+      font-weight: 650;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      min-height: 2.85rem;
+      padding: .68rem .78rem;
+      border: 1px solid #cbd3e1;
+      border-radius: .55rem;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+    }
+
+    textarea {
+      min-height: 8rem;
+      resize: vertical;
+    }
+
+    input::placeholder, textarea::placeholder { color: #8792a5; }
+
+    input:focus-visible, select:focus-visible, textarea:focus-visible, button:focus-visible, a:focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    .hint {
+      display: block;
+      margin-top: .35rem;
+      color: var(--muted);
+      font-size: .82rem;
+    }
+
+    .option-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .7rem 1rem;
+    }
+
+    .option-list label, .consent {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      margin: 0;
+      font-weight: 450;
+    }
+
+    .option-list input, .consent input {
+      width: 1.05rem;
+      min-height: 1.05rem;
+      height: 1.05rem;
+      margin: 0;
+      accent-color: var(--brand);
+    }
+
+    .actions { margin-top: 1.3rem; }
+
+    button {
+      min-height: 2.9rem;
+      padding: .7rem 1.15rem;
+      border: 0;
+      border-radius: .6rem;
+      background: var(--brand);
+      color: #fff;
+      cursor: pointer;
+      font: inherit;
+      font-weight: 700;
+    }
+
+    button:hover { background: var(--brand-dark); }
+
+    .contact-card { position: sticky; top: 1rem; }
+    .contact-card fieldset { padding: 0; border: 0; }
+    .contact-card legend { margin-bottom: .65rem; padding: 0; }
+    .contact-card .field + .field { margin-top: 1rem; }
+    .consent { align-items: flex-start; margin-top: 1rem; }
+    .consent input { flex: 0 0 auto; margin-top: .25rem; }
+
+    .endpoint-note {
+      margin: 1rem 0 0;
+      padding: .8rem;
+      border-radius: .55rem;
+      background: #f1f2ff;
+      color: #333a79;
+      font-size: .84rem;
+    }
+
+    footer {
+      padding: 1.5rem 1rem;
+      color: var(--muted);
+      text-align: center;
+      font-size: .88rem;
+    }
+
+    @media (max-width: 760px) {
+      .hero { padding-top: 2.5rem; }
+      .hero h1 { margin-top: 2.2rem; }
+      main { grid-template-columns: 1fr; }
+      .contact-card { position: static; }
+    }
+
+    @media (max-width: 520px) {
+      .field-grid { grid-template-columns: 1fr; }
+      .field-wide { grid-column: auto; }
+      fieldset { padding: .9rem; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <a class="brand" href="#" aria-label="Nexo, inicio">
+        <span class="brand-mark" aria-hidden="true">N</span>
+        <span>NEXO</span>
+      </a>
+      <h1>Aprender es mejor en compañía.</h1>
+      <p>Encuentra personas con tus mismos intereses, comparte lo que sabes y descubre algo nuevo cada día.</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="card" aria-labelledby="signup-title">
+      <h2 id="signup-title">Crea tu cuenta</h2>
+      <p class="intro">Completa tus datos para unirte a la comunidad Nexo.</p>
+
+      <!-- Reemplaza el endpoint de ejemplo por el enlace de tu formulario en Formspree. -->
+      <form action="https://formspree.io/f/REEMPLAZAR_ID_REGISTRO" method="POST">
+        <fieldset>
+          <legend>Tu cuenta</legend>
+          <div class="field-grid">
+            <div class="field field-wide">
+              <label for="full-name">Nombre completo</label>
+              <input id="full-name" name="nombre_completo" type="text" autocomplete="name" placeholder="Ej.: Alex García" minlength="2" maxlength="80" required>
+            </div>
+            <div class="field">
+              <label for="signup-email">Correo electrónico</label>
+              <input id="signup-email" name="email" type="email" autocomplete="email" placeholder="tu@correo.com" maxlength="254" required>
+            </div>
+            <div class="field">
+              <label for="username">Nombre de usuario</label>
+              <input id="username" name="usuario" type="text" autocomplete="username" placeholder="Entre 5 y 12 caracteres" pattern="[A-Za-z0-9]{5,12}" minlength="5" maxlength="12" title="Usa entre 5 y 12 letras o números, sin espacios." required>
+            </div>
+            <div class="field field-wide">
+              <label for="password">Contraseña</label>
+              <input id="password" name="password" type="password" autocomplete="new-password" placeholder="Crea una contraseña segura" minlength="10" maxlength="64" pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9]).{10,64}" title="Usa al menos 10 caracteres, con mayúscula, minúscula, número y símbolo." required>
+              <span class="hint">Mínimo 10 caracteres, con mayúscula, minúscula, número y símbolo.</span>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Sobre ti</legend>
+          <div class="field-grid">
+            <div class="field">
+              <label for="age">Edad</label>
+              <input id="age" name="edad" type="number" autocomplete="bday-year" placeholder="Ej.: 24" min="13" max="120" required>
+            </div>
+            <div class="field">
+              <label for="birth-date">Fecha de nacimiento</label>
+              <input id="birth-date" name="fecha_nacimiento" type="date" autocomplete="bday" required>
+            </div>
+            <div class="field">
+              <label for="country">País</label>
+              <select id="country" name="pais" autocomplete="country-name" required>
+                <option value="" selected disabled>Selecciona tu país</option>
+                <option value="Argentina">Argentina</option>
+                <option value="Chile">Chile</option>
+                <option value="Colombia">Colombia</option>
+                <option value="España">España</option>
+                <option value="México">México</option>
+                <option value="Perú">Perú</option>
+                <option value="Uruguay">Uruguay</option>
+                <option value="Otro">Otro</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="city">Ciudad de residencia</label>
+              <input id="city" name="ciudad" type="text" list="cities" autocomplete="address-level2" placeholder="Escribe o elige una ciudad" maxlength="80" required>
+              <datalist id="cities">
+                <option value="Buenos Aires"></option>
+                <option value="Córdoba"></option>
+                <option value="Ciudad de México"></option>
+                <option value="Lima"></option>
+                <option value="Madrid"></option>
+                <option value="Montevideo"></option>
+                <option value="Santiago"></option>
+              </datalist>
+            </div>
+            <div class="field field-wide">
+              <span class="group-label" id="gender-label">Género</span>
+              <div class="option-list" role="group" aria-labelledby="gender-label">
+                <label for="gender-woman"><input id="gender-woman" name="genero" type="radio" value="mujer" required> Mujer</label>
+                <label for="gender-man"><input id="gender-man" name="genero" type="radio" value="hombre"> Hombre</label>
+                <label for="gender-nonbinary"><input id="gender-nonbinary" name="genero" type="radio" value="no-binario"> No binario</label>
+                <label for="gender-other"><input id="gender-other" name="genero" type="radio" value="otro"> Otro</label>
+                <label for="gender-no-answer"><input id="gender-no-answer" name="genero" type="radio" value="prefiero-no-decirlo"> Prefiero no decirlo</label>
+              </div>
+            </div>
+            <div class="field field-wide">
+              <span class="group-label" id="interests-label">Intereses (elige los que quieras)</span>
+              <div class="option-list" role="group" aria-labelledby="interests-label">
+                <label for="interest-tech"><input id="interest-tech" name="intereses" type="checkbox" value="tecnologia"> Tecnología</label>
+                <label for="interest-art"><input id="interest-art" name="intereses" type="checkbox" value="arte"> Arte y diseño</label>
+                <label for="interest-science"><input id="interest-science" name="intereses" type="checkbox" value="ciencia"> Ciencia</label>
+                <label for="interest-language"><input id="interest-language" name="intereses" type="checkbox" value="idiomas"> Idiomas</label>
+                <label for="interest-wellbeing"><input id="interest-wellbeing" name="intereses" type="checkbox" value="bienestar"> Bienestar</label>
+              </div>
+            </div>
+            <div class="field field-wide">
+              <label for="bio">Biografía corta</label>
+              <textarea id="bio" name="biografia" placeholder="Cuéntanos qué te gusta aprender..." maxlength="300"></textarea>
+              <span class="hint">Hasta 300 caracteres.</span>
+            </div>
+          </div>
+        </fieldset>
+
+        <div class="actions">
+          <button type="submit">Crear mi cuenta</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="card contact-card" aria-labelledby="contact-title">
+      <h2 id="contact-title">¿Necesitas ayuda?</h2>
+      <p class="help-copy">Cuéntanos qué sucede y el equipo de soporte se pondrá en contacto contigo.</p>
+
+      <!-- Reemplaza el endpoint de ejemplo por el enlace de tu formulario en Formspree. -->
+      <form action="https://formspree.io/f/REEMPLAZAR_ID_CONTACTO" method="POST">
+        <div class="field">
+          <label for="contact-name">Nombre</label>
+          <input id="contact-name" name="nombre" type="text" autocomplete="name" placeholder="Tu nombre" minlength="2" maxlength="80" required>
+        </div>
+        <div class="field">
+          <label for="contact-email">Email</label>
+          <input id="contact-email" name="email" type="email" autocomplete="email" placeholder="tu@correo.com" maxlength="254" required>
+        </div>
+        <div class="field">
+          <label for="reason">Motivo de contacto</label>
+          <select id="reason" name="motivo" required>
+            <option value="" selected disabled>Selecciona un motivo</option>
+            <option value="cuenta">Problema con mi cuenta</option>
+            <option value="tecnico">Problema técnico</option>
+            <option value="privacidad">Privacidad y datos</option>
+            <option value="otro">Otro</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="message">Mensaje</label>
+          <textarea id="message" name="mensaje" placeholder="Describe el problema con el mayor detalle posible..." minlength="10" maxlength="2000" required></textarea>
+        </div>
+        <label class="consent" for="terms">
+          <input id="terms" name="acepta_terminos" type="checkbox" value="si" required>
+          <span>Acepto los términos y condiciones.</span>
+        </label>
+        <div class="actions">
+          <button type="submit">Enviar mensaje</button>
+        </div>
+      </form>
+      <p class="endpoint-note">Antes de publicar, sustituye el ID de ejemplo en el atributo <code>action</code> de cada formulario por su endpoint real de Formspree.</p>
+    </section>
+  </main>
+
+  <footer>Nexo · Una comunidad para aprender y compartir.</footer>
+</body>
+</html>
